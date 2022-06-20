@@ -1,4 +1,7 @@
 from django.shortcuts import render
+from django.views.generic import TemplateView
 
-
-# class HomepageView()
+class HomepageView(TemplateView):
+    template_name: str = "homepage/html/homepage.html"
+   
+        

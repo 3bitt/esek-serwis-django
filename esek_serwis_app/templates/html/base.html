@@ -1,0 +1,30 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
+    <title>Esek Serwis</title>
+    {% block extra_css %}
+    {% endblock %}
+</head>
+<body>
+    <nav class="navbar navbar-dark bg-light">
+        <form class="container-fluid justify-content-start">
+            <button class="btn btn-outline-success mx-5" type="button">Serwis</button>
+            <button class="btn btn-sm btn-outline-primary" type="button">Dodaj zlecenie naprawy</button>
+            <button class="btn btn-sm btn-outline-primary ms-5" type="button">Baza klientów</button>
+        </form>
+    </nav>
+
+    <div class="content-wrapper">
+        
+        {% block child_content %}
+        {% endblock %}
+
+    </div>
+</body>
+</html>
