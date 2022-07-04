@@ -1,0 +1,30 @@
+{% extends 'templates/html/base.html' %}
+
+{% block child_content %}
+    <div class="container">
+        <div class="row mt-4">
+            <div class="col-2">
+                <a href="{% url 'client:client_create' %}">
+                    <button class="btn btn-sm btn-warning">Dodaj klienta</button>
+                </a>
+            </div>
+        </div>
+        <div class="row mt-3">
+            <div class="col">
+                Wyszukiwarka klientów
+            </div>
+        </div>
+        <div class="row mt-3">
+            <div class="col">
+                <ul>
+                    {% for client in object_list %}
+                        <li>{{ client.first_name}} {{client.last_name }}</li>
+                    {% empty %}
+                        <li>No articles yet.</li>
+                    {% endfor %}
+                    </ul>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

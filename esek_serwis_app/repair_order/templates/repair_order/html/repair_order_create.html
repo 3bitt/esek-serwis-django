@@ -1,0 +1,61 @@
+{% extends 'templates/html/base.html' %}
+
+
+{% block child_content %}
+
+<div class="container my-3">
+    <div class="row mt-3">
+        <div class="col-2">
+            <a href="{% url 'repair_order:repair_order_list' %}">
+                <button class="btn btn-sm btn-warning">Wstecz</button>
+            </a>
+        </div>
+    </div>
+    <div class="row mt-4">
+        <div class="col">
+            <form method="POST" action="{% url 'repair_order:repair_order_create' %}">
+                {% csrf_token %}
+                <div class="row">
+                    <div class="col-1 required">
+                        <label for="name">Klient:</label>
+                    </div>
+                    <div class="col-3">
+                        {{form.client_id}}
+                    </div>
+                </div>
+                <div class="row mt-3">
+                    <div class="col-1 required">
+                        <label for="name">Sprzęt:</label>
+                    </div>
+                    <div class="col-3">
+                        {{form.equipment_name}}
+                    </div>
+                </div>
+                <div class="row mt-3">
+                    <div class="col-1 required">
+                        <label for="name">Opis:</label>
+                    </div>
+                    <div class="col-3">
+                        {{form.description}}
+                    </div>
+                </div>
+                <div class="row mt-3">
+                    <div class="col-1 required">
+                        <label for="name">Status:</label>
+                    </div>
+                    <div class="col-3">
+                        {{form.status}}
+                    </div>
+                </div>
+                <div class="row mt-5">
+                    <div class="col-2">
+                        <button class="btn btn-sm btn-success" type="submit">Dodaj zlecenie</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+{% endblock child_content %}

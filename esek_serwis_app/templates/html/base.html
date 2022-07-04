@@ -14,9 +14,18 @@
 <body>
     <nav class="navbar navbar-dark bg-light">
         <form class="container-fluid justify-content-start">
-            <button class="btn btn-outline-success mx-5" type="button">Serwis</button>
-            <button class="btn btn-sm btn-outline-primary" type="button">Dodaj zlecenie naprawy</button>
-            <button class="btn btn-sm btn-outline-primary ms-5" type="button">Baza klientów</button>
+            <button class="btn btn-outline-dark mx-5" type="button">Serwis</button>
+            <a href="{% url 'repair_order:repair_order_list' %}">
+                <button class="btn btn-sm btn-outline-primary" type="button">
+                Zlecenia
+                </button>
+            </a>
+            <a href="{% url 'client:client_list' %}">
+                <button class="btn btn-sm btn-outline-primary ms-5" type="button">
+                    Klienci
+                </button>
+
+            </a>
         </form>
     </nav>
 

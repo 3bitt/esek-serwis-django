@@ -1,0 +1,49 @@
+{% extends 'templates/html/base.html' %}
+
+{% block child_content %}
+
+<div class="container">
+    <div class="row">
+        <div class="col-2">
+            <a href="{% url 'repair_order:repair_order_create' %}">
+                <button class="btn btn-sm btn-warning">Dodaj zlecenie</button>
+            </a>
+        </div>
+    </div>
+    <div class="row mt-4">
+        <table class="table table-sm">
+            <thead>
+              <tr>
+                <th scope="col" title="Number">#</th>
+                <th scope="col" title="Name">Sprzęt</th>
+                <th scope="col" title="Weight">Opis</th>
+                <th scope="col" title="birthDate">Status</th>
+                <th scope="col" title="mobileNumber">Klient</th>
+                <th scope="col" title="actions">Data zgłoszenia</th>
+              </tr>
+            </thead>
+            <tbody>
+                {% for order in order_list %}
+                <tr>
+                    <th scope="col">{{forloop.counter}}</th>
+                    <td>
+                        {{order.equipment_name}}
+                    </td>
+                    <td>
+                        {{order.description}}
+                    </td>
+                    <td>
+                        {{order.get_status_display}}
+                    </td>
+                    <td>
+                        {{order.client_id.first_name}} {{order.client_id.last_name}}
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+{% endblock %}
