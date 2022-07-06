@@ -9,37 +9,179 @@
 
 <div class="container">
     <div class="row mt-4">
-        <div class="col-2">
+        <div class="col-1">
             <a href="{{request.META.HTTP_REFERER|escape}}">
                 <button class="btn btn-warning btn-sm">Wstecz</button>
             </a>
         </div>
-        <div class="col">
+        <div class="col-1">
             <a href="{% url 'client:client-update' client.id %}">
                 <button class="btn btn-warning btn-sm">Edytuj</button>
             </a>
         </div>
+        <div class="col">
+            <!-- DELETE MODAL -->
+            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="exampleModalLabel">Usuwasz {{client.first_name}} {{client.last_name}}</h5>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body">
+                      Jesteś pewien, że chcesz usunąć {{client.first_name}} {{client.last_name}}
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Anuluj</button>
+                        <form method="POST" action="{% url 'client:client-delete' client.id %}">
+                            {% csrf_token %}
+                            <input class="btn btn-danger" type="submit" value="Usuń">
+                        </form>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <button type="button" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#exampleModal">
+                Usuń
+              </button>
+        </div>
     </div>
     <div class="row mt-4">
+        <div class="col-3">
+            <div class="row">
+                <div class="col-5 border-bottom">
+                    <span>Imię Nazwisko:</span>
+                </div>
+                <div class="col-7 border-bottom">
+                    <span class="text-bold">{{client.first_name}} {{client.last_name}}</span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-5 border-bottom">
+                    <span>Telefon:</span>
+                </div>
+                <div class="col-7 border-bottom">
+                    <span class="text-bold">{{client.mobile}}</span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-5 border-bottom">
+                    <span>Email:</span>
+                </div>
+                <div class="col-7 border-bottom">
+                    <span class="text-bold">{{client.email}}</span>
+                </div>
+            </div>
+            <div class="row my-3">
+                <div class="col-2">
+                    <p class="m-0 text-bold">Adres</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-5 border-bottom">
+                    <span>Ulica i numer:</span>
+                </div>
+                <div class="col-7 border-bottom">
+                    <span class="text-bold">{{client.street}} {{client.home_number}}</span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-5 border-bottom">
+                    <span>Kod pocztowy:</span>
+                </div>
+                <div class="col-7 border-bottom">
+                    <span class="text-bold">{{client.zip_code}}</span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-5 border-bottom">
+                    <span>Miasto:</span>
+                </div>
+                <div class="col-7 border-bottom">
+                    <span class="text-bold">{{client.city}}</span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-5 border-bottom">
+                    <span>Kraj:</span>
+                </div>
+                <div class="col-7 border-bottom">
+                    <span class="text-bold">{{client.country}}</span>
+                </div>
+            </div>
+        </div>
+        <div class="col-1">
+        </div>
         <div class="col">
-            <div>
-                <span class="client_name">{{client.first_name}} {{client.last_name}}</span>
+            <div class="row">
+                <div class="col">
+                    <span class="text-bold">Zlecenia:</span>
+                </div>
             </div>
-            <div>
-                {{client.mobile}}
-            </div>
-            <div>
-                {{client.email}}
-            </div>
-            <div>
-                {{client.first_name}} {{client.last_name}}
-            </div>
-            <div>
-                {{client.first_name}} {{client.last_name}}
+            <div class="row">
+                {% if client.repairorder_set.all %}
+                <table class="table table-sm repair-order-table">
+                    <thead>
+                      <tr>
+                        <th scope="col" title="Name">ID</th>
+                        <th class="col-description" scope="col" title="Weight">Sprzęt</th>
+                        <th class="col-status" scope="col" title="birthDate">Opis</th>
+                        <th scope="col" title="created_date">Status</th>
+                        <th scope="col" title="fixed_date">Data zgłoszenia</th>
+                        <th scope="col" title="fixed_date">Data naprawy</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                        {% for order in client.repairorder_set.all %}
+                        <tr>
+                            <th scope="col">{{order.id}}</th>
+                            <td>
+                                {{order.equipment_name}}
+                            </td>
+                            <td>
+                                <div class="repair-description">
+                                {{order.description}}
+                                </div>
+                            </td>
+                            <td>
+                                <div class="repair-status
+                                {% if order.status == 'NEW' %}
+                                repair-status-new
+                                {% elif order.status == 'IN_PROGRESS' %}
+                                repair-status-in-progress
+                                {% elif order.status == 'FIXED' %}
+                                repair-status-fixed
+                                {% elif order.status == 'CLOSED' %}
+                                repair-order-closed
+                                {% endif %}">
+                                {{order.get_status_display}}                        
+                                </div>
+                            </td>
+                            <td>
+                                {{order.created_date}}
+                            </td>
+                            <td>
+                                {% if order.fixed_date %}
+                                {{order.fixed_date}}
+                                {% else %}
+                                ---
+                                {% endif %}
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                {% else %}
+                <i>Ten klient jeszcze nic nie zlecił</i>
+                {% endif %}
             </div>
         </div>
     </div>
-    {{client}}
 </div>
+
+
 
 {% endblock child_content %}

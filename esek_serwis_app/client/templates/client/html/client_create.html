@@ -12,85 +12,93 @@
         <div class="row mt-4">
             <div class="col">
                 <form method="POST" action="{% url 'client:client-create' %}">
-                {% csrf_token %}
-                <div class="row">
-                    <div class="col-auto">
-                        <div class="row align-items-center mb-2">
-                            <div class="col-5">
-                                <label>Imię:</label>
+                    {% csrf_token %}
+                    <div class="row">
+                        <div class="col-auto">
+                            <div class="row align-items-center mb-2">
+                                <div class="col-5">
+                                    <label>Imię:</label>
+                                </div>
+                                <div class="col-4">
+                                    {{form.first_name}}
+                                </div>
                             </div>
-                            <div class="col-4">
-                                {{form.first_name}}
+                            <div class="row align-items-center mb-2">
+                                <div class="col-5">
+                                    <label>Nazwisko:</label>
+                                </div>
+                                <div class="col-4">
+                                    {{form.last_name}}
+                                </div>
+                            </div>
+                            <div class="row align-items-center mb-2">
+                                <div class="col-5">
+                                    <label>Nr telefonu:</label>
+                                </div>
+                                <div class="col-4">
+                                    {{form.mobile}}
+                                </div>
+                            </div>
+                            <div class="row align-items-center mb-2">
+                                <div class="col-5">
+                                    <label>Email:</label>
+                                </div>
+                                <div class="col-4">
+                                    {{form.email}}
+                                </div>
+                            </div>
+                            <div class="row align-items-center mb-2">
+                                <div class="col-5">
+                                    <label>Uwagi:</label>
+                                </div>
+                                <div class="col-4">
+                                    {{form.extra_info}}
+                                </div>
                             </div>
                         </div>
-                        <div class="row align-items-center mb-2">
-                            <div class="col-5">
-                                <label>Nazwisko:</label>
+                        <div class="col-auto ms-5">
+                            <div class="row align-items-center mb-2">
+                                <div class="col-5">
+                                    <label>Ulica:</label>
+                                </div>
+                                <div class="col-4">
+                                    {{form.street}}
+                                </div>
                             </div>
-                            <div class="col-4">
-                                {{form.last_name}}
+                            <div class="row align-items-center mb-2">
+                                <div class="col-5">
+                                    <label>Nr domu:</label>
+                                </div>
+                                <div class="col-4">
+                                    {{form.home_number}}
+                                </div>
                             </div>
-                        </div>
-                        <div class="row align-items-center mb-2">
-                            <div class="col-5">
-                                <label>Nr telefonu:</label>
+                            <div class="row align-items-center mb-2">
+                                <div class="col-5">
+                                    <label>Kod pocztowy:</label>
+                                </div>
+                                <div class="col-4">
+                                    {{form.zip_code}}
+                                </div>
                             </div>
-                            <div class="col-4">
-                                {{form.mobile}}
+                            <div class="row align-items-center mb-2">
+                                <div class="col-5">
+                                    <label>Miasto:</label>
+                                </div>
+                                <div class="col-4">
+                                    {{form.city}}
+                                </div>
                             </div>
-                        </div>
-                        <div class="row align-items-center mb-2">
-                            <div class="col-5">
-                                <label>Email:</label>
-                            </div>
-                            <div class="col-4">
-                                {{form.email}}
+                            <div class="row align-items-center mb-2">
+                                <div class="col-5">
+                                    <label>Kraj:</label>
+                                </div>
+                                <div class="col-4">
+                                    {{form.country}}
+                                </div>
                             </div>
                         </div>
                     </div>
-                    <div class="col-auto ms-5">
-                        <div class="row align-items-center mb-2">
-                            <div class="col-5">
-                                <label>Ulica:</label>
-                            </div>
-                            <div class="col-4">
-                                {{form.street}}
-                            </div>
-                        </div>
-                        <div class="row align-items-center mb-2">
-                            <div class="col-5">
-                                <label>Nr domu:</label>
-                            </div>
-                            <div class="col-4">
-                                {{form.home_number}}
-                            </div>
-                        </div>
-                        <div class="row align-items-center mb-2">
-                            <div class="col-5">
-                                <label>Kod pocztowy:</label>
-                            </div>
-                            <div class="col-4">
-                                {{form.zip_code}}
-                            </div>
-                        </div>
-                        <div class="row align-items-center mb-2">
-                            <div class="col-5">
-                                <label>Miasto:</label>
-                            </div>
-                            <div class="col-4">
-                                {{form.city}}
-                            </div>
-                        </div>
-                        <div class="row align-items-center mb-2">
-                            <div class="col-5">
-                                <label>Kraj:</label>
-                            </div>
-                            <div class="col-4">
-                                {{form.country}}
-                            </div>
-                        </div>
-                    </div>
-                </div>
                     <div class="row mt-5">
                         <div class="col-1">
                             <input class="btn btn-sm btn-success" type="submit" value="Dodaj klienta">

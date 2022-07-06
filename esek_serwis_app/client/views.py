@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.views import generic
 from django.urls import reverse_lazy
 
-from .models import Client, Address
+from .models import Client
 from .forms import ClientCreateForm
 
 
@@ -20,16 +20,6 @@ class ClientCreateView(generic.CreateView):
     def form_valid(self, form: ClientCreateForm):
         if form.is_valid():
             self.object = form.save()
-            address_obj = {
-                'client_id': self.object,
-                'street': form.cleaned_data.pop('street'),
-                'home_number': form.cleaned_data.pop('home_number'),
-                'zip_code': form.cleaned_data.pop('zip_code'),
-                'city': form.cleaned_data.pop('city'),
-                'country': form.cleaned_data.pop('country')
-            }
-            Address.objects.create(**address_obj)    
-
         return super().form_valid(form)
 
 
@@ -43,3 +33,10 @@ class ClientUpdateView(generic.UpdateView):
     template_name = 'client/html/client_update.html'
     form_class = ClientCreateForm
     context_object_name = 'client'
+    
+    def get_success_url(self):
+        return reverse_lazy('client:client-detail', kwargs={'pk': self.kwargs['pk']})
+    
+class ClientDeleteView(generic.DeleteView):
+    model = Client
+    success_url = reverse_lazy('client:client-list')

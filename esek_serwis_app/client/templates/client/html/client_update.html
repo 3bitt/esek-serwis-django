@@ -4,7 +4,7 @@
     <div class="container">
         <div class="row mt-4">
             <div class="col-1">
-                <a href="{% url 'client:client-list' %}">
+                <a href="{% url 'client:client-detail' client.id %}">
                     <button class="btn btn-sm btn-warning">Wstecz</button>
                 </a>
             </div>
@@ -12,8 +12,7 @@
         <div class="row mt-4">
             
             <div class="col">
-                {{client}}
-                <form method="POST" action="{% url 'client:client-create' %}">
+                <form method="POST" action="{% url 'client:client-update' client.id %}">
                 {% csrf_token %}
                 <div class="row">
                     <div class="col-auto">
@@ -95,7 +94,7 @@
                 </div>
                     <div class="row mt-5">
                         <div class="col-1">
-                            <input class="btn btn-sm btn-success" type="submit" value="Dodaj klienta">
+                            <input class="btn btn-sm btn-success" type="submit" value="Zaktualizuj">
                         </div>
                     </div>
                 </form>

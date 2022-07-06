@@ -11,13 +11,13 @@ class CustomClientChoiceField(forms.ModelChoiceField):
 
 
 class RepairOrderCreateForm(forms.ModelForm):
-    client_id = CustomClientChoiceField(queryset=Client.objects.all())
+    client = CustomClientChoiceField(queryset=Client.objects.all())
 
     class Meta:
         model = RepairOrder
         
         fields = [
-            'client_id',
+            'client',
             'equipment_name',
             'description',
             'status',
@@ -27,7 +27,7 @@ class RepairOrderCreateForm(forms.ModelForm):
             'equipment_name': forms.TextInput(attrs= {
                 'class': 'input'
             }),
-            # 'client_id': CustomClientChoiceField(
+            # 'client': CustomClientChoiceField(
             #     queryset=Client.objects.all())
         }
         

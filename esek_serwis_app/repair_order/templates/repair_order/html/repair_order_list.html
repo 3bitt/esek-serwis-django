@@ -55,7 +55,11 @@
                         </div>
                     </td>
                     <td>
-                        {{order.client_id.first_name}} {{order.client_id.last_name}}
+                        {% if order.client %}
+                        {{order.client.first_name}} {{order.client.last_name}}
+                        {% else %}
+                        <i>(usunięty)</i>
+                        {% endif %}
                     </td>
                     <td>
                         {{order.created_date}}

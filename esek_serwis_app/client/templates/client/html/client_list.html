@@ -43,8 +43,7 @@
                         <td>
                             {{client.email}}                        
                         </td>
-                        <td>
-                            {% for address in client.address_set.all %}
+                        <td>                            
                             <div>
                                 {{address.street}}
                                 {{address.home_number}}
@@ -52,7 +51,6 @@
                                 {{address.city}}
                                 {{address.country}}
                             </div>
-                            {% endfor %}
                         </td>
                         <td>
                             {{client.registration_date}}

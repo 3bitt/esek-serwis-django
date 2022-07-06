@@ -12,7 +12,7 @@ class RepairOrder(models.Model):
         FIXED = 'FIXED', 'Naprawiony'
         CLOSED = 'CLOSED', 'Zakończone'
         
-    client_id = models.ForeignKey(Client, verbose_name="client", on_delete=models.SET_NULL, null=True)
+    client = models.ForeignKey(Client, verbose_name="client", on_delete=models.SET_NULL, null=True)
     equipment_name = models.CharField(max_length=255)
     description = models.TextField(max_length=255)
     status = models.CharField(
