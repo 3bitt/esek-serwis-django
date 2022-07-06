@@ -10,7 +10,9 @@
             </div>
         </div>
         <div class="row mt-4">
+            
             <div class="col">
+                {{client}}
                 <form method="POST" action="{% url 'client:client-create' %}">
                 {% csrf_token %}
                 <div class="row">

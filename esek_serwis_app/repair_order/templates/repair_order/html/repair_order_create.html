@@ -1,10 +1,10 @@
 {% extends 'templates/html/base.html' %}
-
+{% load static %}
 
 {% block child_content %}
 
 <div class="container my-3">
-    <div class="row mt-3">
+    <div class="row mt-4">
         <div class="col-2">
             <a href="{% url 'repair_order:repair_order_list' %}">
                 <button class="btn btn-sm btn-warning">Wstecz</button>
@@ -19,8 +19,11 @@
                     <div class="col-1 required">
                         <label for="name">Klient:</label>
                     </div>
-                    <div class="col-3">
+                    <div class="col-auto">
                         {{form.client_id}}
+                    </div>
+                    <div class="col-3">
+                        <input class="form-control-sm" type="text" id="client_search_input" placeholder="Filtruj klientów">
                     </div>
                 </div>
                 <div class="row mt-3">
@@ -57,5 +60,6 @@
     </div>
 </div>
 
+<script src="{% static 'js/filter_clients.js' %}"></script>
 
 {% endblock child_content %}

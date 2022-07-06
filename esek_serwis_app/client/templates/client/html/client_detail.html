@@ -1,0 +1,45 @@
+{% extends 'templates/html/base.html' %}
+{% load static %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/client_detail.css' %}">
+{% endblock extra_css %}
+
+{% block child_content %}
+
+<div class="container">
+    <div class="row mt-4">
+        <div class="col-2">
+            <a href="{{request.META.HTTP_REFERER|escape}}">
+                <button class="btn btn-warning btn-sm">Wstecz</button>
+            </a>
+        </div>
+        <div class="col">
+            <a href="{% url 'client:client-update' client.id %}">
+                <button class="btn btn-warning btn-sm">Edytuj</button>
+            </a>
+        </div>
+    </div>
+    <div class="row mt-4">
+        <div class="col">
+            <div>
+                <span class="client_name">{{client.first_name}} {{client.last_name}}</span>
+            </div>
+            <div>
+                {{client.mobile}}
+            </div>
+            <div>
+                {{client.email}}
+            </div>
+            <div>
+                {{client.first_name}} {{client.last_name}}
+            </div>
+            <div>
+                {{client.first_name}} {{client.last_name}}
+            </div>
+        </div>
+    </div>
+    {{client}}
+</div>
+
+{% endblock child_content %}

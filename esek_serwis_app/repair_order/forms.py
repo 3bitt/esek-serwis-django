@@ -3,13 +3,18 @@ from client.models import Client
 
 from repair_order.models import RepairOrder
 
+class CustomClientChoiceField(forms.ModelChoiceField):
+    to_field_name='client_name'
+    
+    def label_from_instance(self, obj):
+        return f'{obj.first_name} {obj.last_name} - ID: {obj.id}'
+
+
 class RepairOrderCreateForm(forms.ModelForm):
+    client_id = CustomClientChoiceField(queryset=Client.objects.all())
 
     class Meta:
         model = RepairOrder
-        exclude = [
-            'created_date',
-        ]
         
         fields = [
             'client_id',
@@ -22,6 +27,7 @@ class RepairOrderCreateForm(forms.ModelForm):
             'equipment_name': forms.TextInput(attrs= {
                 'class': 'input'
             }),
-            # 'client_id': forms.ModelChoiceField(
-            #     queryset=Client.objects.all().order_by('-registration_date'))
+            # 'client_id': CustomClientChoiceField(
+            #     queryset=Client.objects.all())
         }
+        

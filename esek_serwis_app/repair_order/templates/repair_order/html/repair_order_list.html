@@ -1,9 +1,14 @@
 {% extends 'templates/html/base.html' %}
+{% load static %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/repair_order_list.css' %}">
+{% endblock extra_css %}
 
 {% block child_content %}
 
 <div class="container">
-    <div class="row">
+    <div class="row mt-4">
         <div class="col-2">
             <a href="{% url 'repair_order:repair_order_create' %}">
                 <button class="btn btn-sm btn-warning">Dodaj zlecenie</button>
@@ -11,32 +16,56 @@
         </div>
     </div>
     <div class="row mt-4">
-        <table class="table table-sm">
+        <table class="table table-sm repair-order-table">
             <thead>
               <tr>
-                <th scope="col" title="Number">#</th>
+                <th class="col-id" scope="col" title="Number">ID</th>
                 <th scope="col" title="Name">Sprzęt</th>
-                <th scope="col" title="Weight">Opis</th>
-                <th scope="col" title="birthDate">Status</th>
+                <th class="col-description" scope="col" title="Weight">Opis</th>
+                <th class="col-status" scope="col" title="birthDate">Status</th>
                 <th scope="col" title="mobileNumber">Klient</th>
-                <th scope="col" title="actions">Data zgłoszenia</th>
+                <th scope="col" title="created_date">Data zgłoszenia</th>
+                <th scope="col" title="fixed_date">Data naprawy</th>
               </tr>
             </thead>
             <tbody>
                 {% for order in order_list %}
                 <tr>
-                    <th scope="col">{{forloop.counter}}</th>
+                    <th scope="col">{{order.id}}</th>
                     <td>
                         {{order.equipment_name}}
                     </td>
                     <td>
+                        <div class="repair-description">
                         {{order.description}}
+                        </div>
                     </td>
                     <td>
-                        {{order.get_status_display}}
+                        <div class="repair-status
+                        {% if order.status == 'NEW' %}
+                        repair-status-new
+                        {% elif order.status == 'IN_PROGRESS' %}
+                        repair-status-in-progress
+                        {% elif order.status == 'FIXED' %}
+                        repair-status-fixed
+                        {% elif order.status == 'CLOSED' %}
+                        repair-order-closed
+                        {% endif %}">
+                        {{order.get_status_display}}                        
+                        </div>
                     </td>
                     <td>
                         {{order.client_id.first_name}} {{order.client_id.last_name}}
+                    </td>
+                    <td>
+                        {{order.created_date}}
+                    </td>
+                    <td>
+                        {% if order.fixed_date %}
+                        {{order.fixed_date}}
+                        {% else %}
+                        ---
+                        {% endif %}
                     </td>
                 </tr>
                 {% endfor %}
